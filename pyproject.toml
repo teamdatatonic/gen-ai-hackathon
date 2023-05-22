@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "langchain-demo"
+version = "0.1.0"
+description = ""
+authors = ["Zachary <zachary.smith@datatonic.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "langchain_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.0.150"
+openai = "^0.27.4"
+chromadb = "^0.3.21"
+tiktoken = "^0.3.3"
+gradio = "^3.28.2"
+unstructured = "^0.6.3"
+tqdm = "^4.65.0"
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+langchain_demo = "langchain_demo.qna:main"
