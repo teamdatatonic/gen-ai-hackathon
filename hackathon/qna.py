@@ -168,3 +168,7 @@ def main():
     demo.queue()
     # Launch the webserver locally
     demo.launch()
+
+
+if __name__ == "__main__":
+    main()

@@ -1,21 +1,20 @@
 [tool.poetry]
-name = "langchain-demo"
+name = "gen-ai-hackathon"
 version = "0.1.0"
-description = ""
+description = "Intro to LangChain Hackathon"
 authors = ["Zachary <zachary.smith@datatonic.com>"]
-license = "MIT"
-readme = "README.md"
-packages = [{include = "langchain_demo"}]
+readme = "hackathon/README.md"
+packages = [{include = "hackathon"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 langchain = "^0.0.150"
-openai = "^0.27.4"
 chromadb = "^0.3.21"
 tiktoken = "^0.3.3"
 gradio = "^3.28.2"
 unstructured = "^0.6.3"
 tqdm = "^4.65.0"
+google-cloud-aiplatform = "^1.25.0"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
@@ -25,4 +24,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-langchain_demo = "langchain_demo.qna:main"
+hackathon = "hackathon.qna:main"
