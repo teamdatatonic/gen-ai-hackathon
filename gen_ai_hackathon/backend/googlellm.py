@@ -49,8 +49,6 @@ class GooglePalmEmbeddings(BaseModel, Embeddings):
 
 
 class GoogleLLM(LLM):
-    
-    # Model name options {text-bison-alpha, text-bison@001}
     model_name: str="text-bison@001"
     _llm = TextGenerationModel.from_pretrained(model_name)
     max_output_tokens:int = 256
@@ -74,6 +72,7 @@ class GoogleLLM(LLM):
         }
     
     def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
+        """Make a prediction based on a prompt."""
         text = str(self._llm.predict(
             prompt, 
             max_output_tokens=self.max_output_tokens, 

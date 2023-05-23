@@ -25,7 +25,9 @@ Chat History:
 Question: {question}
 """
 
+# The PromptTemplate reads input variables (i.e.: 'chat_history', 'question') from the template
 SYSTEM_PROMPT = PromptTemplate.from_template(template)
+
 
 
 def load_documents(source_dir):
@@ -41,31 +43,27 @@ def load_documents(source_dir):
     return documents
 
 
-def create_vector_store():
-    documents = load_documents(source_dir="datatonic.com")
+def create_embeddings(source_dir):
+    vector_store = load_embeddings()
 
-    # Individual documents will often exceed the 4096 token limit for GPT-3.
+    documents = load_documents(source_dir=source_dir)
+    vector_store = embed_documents(vector_store, documents)
+
+    return vector_store
+
+
+def embed_documents(vector_store, documents):
+    # Individual documents will often exceed the token limit.
     # By splitting documents into chunks of 1000 token
     # These chunks fit into the token limit alongside the user prompt
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     texts = text_splitter.split_documents(documents)
 
-    vector_store = embed_documents(persist_dir=PERSIST_DIR, texts=texts)
+    # Add our documents (split into shards) to the DB
+    # They will be embedded using the defined GooglePalmEmbeddings model
+    vector_store.add_texts(texts)
 
-    return vector_store
-
-
-def embed_documents(texts):
-    # We use GoogleLLM embeddings model, however other models can be substituted here
-    embeddings = GooglePalmEmbeddings()()
-    # We create a vector store database relating documents to embeddings
-    # This embedding database is used to relate user queries to relevant documentation
-    vector_store = Chroma.from_documents(
-        persist_directory=PERSIST_DIR,
-        documents=texts,
-        embedding=embeddings,
-    )
-
+    # Persist the ChromaDB locally, so we can reload the script without expensively re-embedding the database
     vector_store.persist()
 
     return vector_store

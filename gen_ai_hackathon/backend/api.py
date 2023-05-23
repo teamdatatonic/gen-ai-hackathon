@@ -8,25 +8,22 @@ app = FastAPI()
 
 class Message(BaseModel):
     question: str
-    chat_history: list
+    chat_history: tuple
 
 
 @app.on_event("startup")
 async def startup_event():
     if not Path(chains.PERSIST_DIR).exists():
-        chains.create_vector_store()
+        chains.create_embeddings("datatonic.com")
 
 
 @app.post("/query")
 async def query_model(message: Message):
     try:
-        # map history (list of lists) to expected format of chat_history (list of tuples)
-        chat_history = map(tuple, message.chat_history)
-
         response = chains.qa_with_sources_chain()(
             {
                 "question": message.question,
-                "chat_history": chat_history,
+                "chat_history": message.chat_history,
             }
         )
     except Exception as e:

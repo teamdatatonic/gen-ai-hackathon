@@ -36,7 +36,10 @@ def bot(history):
 
 
 def q_a(question: str, history: list):
-    response = _query_model(question, history)
+    # map history (list of lists) to expected format of chat_history (list of tuples)
+    chat_history = map(tuple, history)
+
+    response = _query_model(question, chat_history)
 
     # Format source documents (sources of excerpts passed to the LLM) into links the user can validate
     sources = [
