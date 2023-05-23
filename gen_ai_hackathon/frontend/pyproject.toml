@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "gen-ai-hackathon-frontend"
+version = "0.1.0"
+description = "Intro to LangChain Hackathon"
+authors = ["Zachary <zachary.smith@datatonic.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9.16"
+gradio = "^3.28.2"
+requests = "^2.31.0"
+google-auth = "^2.18.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,27 +1,20 @@
 [tool.poetry]
-name = "gen-ai-hackathon"
+name = "gen-ai-hackathon-backend"
 version = "0.1.0"
 description = "Intro to LangChain Hackathon"
 authors = ["Zachary <zachary.smith@datatonic.com>"]
-readme = "hackathon/README.md"
-packages = [{include = "hackathon"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9.16"
 langchain = "^0.0.150"
 chromadb = "^0.3.21"
 tiktoken = "^0.3.3"
-gradio = "^3.28.2"
 unstructured = "^0.6.3"
 tqdm = "^4.65.0"
+fastapi = "^0.95.2"
+uvicorn = "^0.22.0"
 google-cloud-aiplatform = "^1.25.0"
-
-[tool.poetry.group.dev.dependencies]
-jupyter = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
-hackathon = "hackathon.qna:main"
