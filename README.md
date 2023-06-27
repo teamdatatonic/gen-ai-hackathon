@@ -1,14 +1,29 @@
-# Generative AI LangChain Hackathon
+# Generative AI Hackathon
 
-LangChain is a Python framework for developing applications using language models. It abstracts the connection between applications and LLMs, allowing a loose coupling between code and specific foundation models like Google PaLM.
+<a target="_blank" href="https://colab.research.google.com/github/teamdatatonic/gen-ai-hackathon/blob/main/hackathon.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
 
-## Workshop
-Open `hackathon.ipynb` in JuPyter labs or as a Google CoLab notebook. The notebook is self-contained (includes python `pip` install command), but does assume that `wget` is available as a command line tool.
+LangChain is a Python framework for developing applications using language models. 
+It abstracts the connection between applications and LLMs, allowing a loose coupling between code and specific foundation models like Google PaLM.
+
+## The challenge
+
+Open [the notebook](hackathon.ipynb) in Jupyter or Google CoLab. 
+The notebook is self-contained (includes python `pip` install commands).
+However, the following pre-requisites are required to get started:
+
+- Google Cloud Project with  Vertex AI API enabled
+- `wget` is available in shell
 
 ## Going further
-After completing the workshop, an example setup for deploying the knowledge worker to production is viewable in `/gen_ai_hackathon`. The next steps covered include separating the GradI/O frontend into a separate server, and creating a FastAPI LangChain API for serving requests. Example CI:CD config files, such as `Dockerfile` and `cloudbuild.yaml` are also included to demonstrate how the servers may be built as Docker containers and stored in a Google Cloud Artifact Registry for deployment with Cloud Run.
+
+After completing the workshop, an example setup for deploying the knowledge worker to production is viewable in [gen_ai_hackathon](gen_ai_hackathon). 
+The next steps covered include separating the Gradio front-end into a separate server, and creating a FastAPI LangChain API for serving requests. 
+Example CI/CD pipelines based on CloudBuild are also included to demonstrate how the servers may be built as Docker containers and stored in a Google Cloud Artifact Registry for deployment with Cloud Run.
 
 ## Running the notebook locally
+
 To run the notebook in a `poetry` managed environment:
 
 1. Install the virtual environment (set `virtualenvs.in-project` as `true` to create the `.venv` environment in the project folder).
