@@ -1,6 +1,3 @@
-dev: ## run streamlit locally
-	@poetry run python main.py
-
 install: ## setup and install poetry dependencies
 	@poetry config virtualenvs.in-project true; poetry install
 
