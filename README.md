@@ -9,18 +9,16 @@ It abstracts the connection between applications and LLMs, allowing a loose coup
 
 ## The challenge
 
-Open [the notebook](hackathon.ipynb) in Jupyter or Google CoLab. 
+Open [the notebook](hackathon.ipynb) in Jupyter or [Google CoLab](https://colab.research.google.com/github/teamdatatonic/gen-ai-hackathon/blob/main/hackathon.ipynb). 
 The notebook is self-contained (includes python `pip` install commands).
 However, the following pre-requisites are required to get started:
 
 - Google Cloud Project with  Vertex AI API enabled
-- `wget` is available in shell
 
 ## Going further
 
 After completing the workshop, an example setup for deploying the knowledge worker to production is viewable in [gen_ai_hackathon](gen_ai_hackathon). 
 The next steps covered include separating the Gradio front-end into a separate server, and creating a FastAPI LangChain API for serving requests. 
-Example CI/CD pipelines based on CloudBuild are also included to demonstrate how the servers may be built as Docker containers and stored in a Google Cloud Artifact Registry for deployment with Cloud Run.
 
 ## Running the notebook locally
 
@@ -32,4 +30,4 @@ poetry config virtualenvs.in-project true
 poetry install
 ```
 
-2. Set the kernel interpreter as `.venv/bin/python`, or start a JuPyter server using `poetry run jupyter notebook bias_generator.ipynb`.
+2. Set the kernel interpreter as `.venv/bin/python`, or start a JuPyter server using `poetry run jupyter notebook hackathon.ipynb`.
