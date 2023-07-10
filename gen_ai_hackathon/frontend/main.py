@@ -1,8 +1,9 @@
 import os
-import requests
-import gradio as gr
+
 import google.auth.transport.requests
 import google.oauth2.id_token
+import gradio as gr
+import requests
 
 BACKEND_URL = os.environ["BACKEND_URL"]
 
@@ -29,9 +30,7 @@ def bot(history):
     # Using a template, format the response and sources together
     bot_template = "{0}\n\n<details><summary><b>Sources</b></summary>\n\n{1}</details>"
     # Place the response into the conversation history and return
-    history[-1][1] = bot_template.format(
-        bot_message, bot_sources
-    )
+    history[-1][1] = bot_template.format(bot_message, bot_sources)
     return history
 
 
@@ -83,19 +82,22 @@ def main():
     # Build a simple GradIO app that accepts user input and queries the LLM
     # Then displays the response in a ChatBot interface, with markdown support.
     with gr.Blocks(theme=gr.themes.Base()) as demo:
-        
-
         # Set a page title
         gr.Markdown("# Custom knowledge worker")
         # Create a chatbot conversation log
         chatbot = gr.Chatbot(label="🤖 knowledge worker")
         # Create a textbox for user questions
-        msg = gr.Textbox(label="👩‍💻 user input", info="Query information from the custom knowledge base.")
+        msg = gr.Textbox(
+            label="👩‍💻 user input",
+            info="Query information from the custom knowledge base.",
+        )
 
         # Align both buttons on the same row
         with gr.Row():
             send = gr.Button(value="Send", variant="primary").style(size="sm")
-            clear = gr.Button(value="Clear History", variant="secondary").style(size="sm")
+            clear = gr.Button(value="Clear History", variant="secondary").style(
+                size="sm"
+            )
 
         # Submit message on <enter> or clicking "Send" button
         msg.submit(submit, [msg, chatbot], [msg, chatbot], queue=False)

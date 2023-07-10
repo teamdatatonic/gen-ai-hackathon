@@ -1,7 +1,11 @@
+import os
 from pathlib import Path
+
 import chains
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+
+WEBSITE = os.environ["BACKEND_URL"]
 
 app = FastAPI()
 
@@ -14,7 +18,7 @@ class Message(BaseModel):
 @app.on_event("startup")
 async def startup_event():
     if not Path(chains.PERSIST_DIR).exists():
-        chains.create_embeddings("datatonic.com")
+        chains.create_embeddings(WEBSITE)
 
 
 @app.post("/query")

@@ -1,12 +1,16 @@
-from googlellm import GoogleLLM, GooglePalmEmbeddings
 from langchain.chains import ConversationalRetrievalChain
-from langchain.document_loaders import DirectoryLoader, UnstructuredHTMLLoader
+from langchain.chat_models import ChatVertexAI
+from langchain.document_loaders.recursive_url_loader import RecursiveUrlLoader
+from langchain.embeddings import VertexAIEmbeddings
 from langchain.prompts import PromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 
 PERSIST_DIR = "chromadb"
-template = """\
+
+# The PromptTemplate reads input variables (i.e.: 'chat_history', 'question') from the template
+SYSTEM_PROMPT = PromptTemplate.from_template(
+    """\
 You are a helpful chatbot designed to perform Q&A on a set of documents.
 Always respond to users with friendly and helpful messages.
 Your goal is to answer user questions using relevant sources.
@@ -24,21 +28,16 @@ Chat History:
 {chat_history}
 Question: {question}
 """
-
-# The PromptTemplate reads input variables (i.e.: 'chat_history', 'question') from the template
-SYSTEM_PROMPT = PromptTemplate.from_template(template)
+)
 
 
-
-def load_documents(source_dir):
-    # Load the documentation using a HTML parser
-    loader = DirectoryLoader(
-        source_dir,
-        glob="**/*.html",
-        loader_cls=UnstructuredHTMLLoader,
-        show_progress=True,
-    )
+def load_documents(url):
+    # Search the target URL to find subpages.
+    # This search may fail to expose all sites. This is due to restrictions webservers place to prevent webscraping.
+    loader = RecursiveUrlLoader(url=url)
     documents = loader.load()
+
+    print(f"Loaded: {len(documents)} documents from {url}.")
 
     return documents
 
@@ -71,7 +70,7 @@ def embed_documents(vector_store, documents):
 
 def load_embeddings():
     # We use GoogleLLM embeddings model, however other models can be substituted here
-    embeddings = GooglePalmEmbeddings()()
+    embeddings = VertexAIEmbeddings()
 
     # Creating embeddings with each re-run is highly inefficient and costly.
     # We instead aim to embed once, then load these embeddings from storage.
@@ -92,7 +91,7 @@ def qa_with_sources_chain(temperature, k):
     # The selected GoogleLLM model uses embedded documents related to the query
     # It parses these documents in order to answer the user question.
     # We use the GoogleLLM LLM, however other models can be substituted here
-    model = GoogleLLM(temperature=temperature)
+    model = ChatVertexAI(temperature=temperature)
 
     # A conversation retrieval chain keeps a history of Q&A / conversation
     # This allows for contextual questions such as "give an example of that (previous response)".
