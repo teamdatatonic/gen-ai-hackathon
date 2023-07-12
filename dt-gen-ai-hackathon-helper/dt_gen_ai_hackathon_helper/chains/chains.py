@@ -2,7 +2,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.llms import VertexAI
 
 
-def create_qa_chain(vector_store, condense_question_prompt, k=2, temperature=0.0):
+def create_qa_chain(vector_store, condense_question_prompt, k=4, temperature=0.0):
     """ Create a Q&A conversation chain using the VertexAI LLM.
 
     Arguments:
