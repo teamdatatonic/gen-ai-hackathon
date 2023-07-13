@@ -28,9 +28,11 @@ class View:
         )
 
         # Format source documents (sources of excerpts passed to the LLM) into links the user can validate
+        # Strip index.html so URLs terminate in the parent folder
+        # Strip https:// and http:// and replace with https:// to enforce https protocol and catch cases where https:// is present or not present
         sources = [
             "[https://{0}](https://{0})".format(
-                doc.metadata["source"].replace("index.html", "")
+                doc.metadata["source"].replace("index.html", "").replace("https://", "").replace("http://", "")
             )
             for doc in response["source_documents"]
         ]
