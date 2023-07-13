@@ -14,6 +14,6 @@ def gcp_bucket_dropdown(bucket_name, label):
     return dropdown
 
 def multiline_prompt_input(initial_value):
-    areabox = widgets.areabox(value=initial_value)
+    areabox = widgets.Textarea(value=initial_value)
 
     return areabox
