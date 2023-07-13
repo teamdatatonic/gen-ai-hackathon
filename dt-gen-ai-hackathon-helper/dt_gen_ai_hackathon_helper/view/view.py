@@ -65,7 +65,7 @@ class View:
         history[-1][1] = bot_template.format(bot_message, bot_sources)
         return history
 
-    def launch_interface(self):
+    def launch_interface(self, share=True, debug=True):
         # Build a simple GradIO app that accepts user input and queries the LLM
         # Then displays the response in a ChatBot interface, with markdown support.
         with gr.Blocks(theme=gr.themes.Base()) as demo:
@@ -94,4 +94,4 @@ class View:
         # Create a queue system so multiple users can access the page at once
         demo.queue()
         # Launch the webserver locally
-        demo.launch(share=True, debug=True)
+        demo.launch(share=share, debug=debug)
