@@ -1,8 +1,9 @@
 [tool.poetry]
-name = "gen-ai-hackathon"
+name = "dt-gen-ai-hackathon-helper"
 version = "0.1.0"
-description = "Intro to LangChain Hackathon"
+description = "Intro to LangChain Hackathon Helper"
 authors = ["Zachary <zachary.smith@datatonic.com>"]
+packages = [{include = "dt_gen_ai_hackathon_helper"}]
 
 [tool.poetry.dependencies]
 python = "^3.9.16"
@@ -15,6 +16,10 @@ google-cloud-aiplatform = "^1.25.0"
 gradio = "^3.28.2"
 google-auth = "^2.18.1"
 jupyterlab = "^3.6.3"
+google-cloud-discoveryengine = "^0.9.1"
+pydantic = "1.10.8"
+typing-extensions = "4.5.0"
+typing-inspect = "0.8.0"
 
 [build-system]
 requires = ["poetry-core"]

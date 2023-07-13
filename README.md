@@ -20,14 +20,9 @@ However, the following pre-requisites are required to get started:
 After completing the workshop, an example setup for deploying the knowledge worker to production is viewable in [gen_ai_hackathon](gen_ai_hackathon). 
 The next steps covered include separating the Gradio front-end into a separate server, and creating a FastAPI LangChain API for serving requests. 
 
-## Running the notebook locally
+## Running the notebook for a Hack event
 
-To run the notebook in a `poetry` managed environment:
-
-1. Install the virtual environment (set `virtualenvs.in-project` as `true` to create the `.venv` environment in the project folder).
-```bash
-poetry config virtualenvs.in-project true
-poetry install
-```
-
-2. Set the kernel interpreter as `.venv/bin/python`, or start a JuPyter server using `poetry run jupyter notebook hackathon.ipynb`.
+1. Create a dedicated Google Cloud project with Vertex AI enabled.
+2. Create a service account with access to Vertex AI (Vertex AI user).
+3. Distribute the JSON credentials for this service account, to allow participants to impersonate the SA and authenticate to access the Vertex AI endpoint.
+4. Post-workshop, remember to delete the key to maintain security and prevent further billing.
