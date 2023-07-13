@@ -23,6 +23,6 @@ The next steps covered include separating the Gradio front-end into a separate s
 ## Running the notebook for a Hack event
 
 1. Create a dedicated Google Cloud project with Vertex AI enabled.
-2. Create a service account with access to Vertex AI.
+2. Create a service account with access to Vertex AI (Vertex AI user).
 3. Distribute the JSON credentials for this service account, to allow participants to impersonate the SA and authenticate to access the Vertex AI endpoint.
 4. Post-workshop, remember to delete the key to maintain security and prevent further billing.
