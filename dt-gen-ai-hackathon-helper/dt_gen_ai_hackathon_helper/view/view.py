@@ -1,12 +1,15 @@
 import gradio as gr
+from langchain.prompts import PromptTemplate
+
 from dt_gen_ai_hackathon_helper.chains.chains import create_qa_chain
-from dt_gen_ai_hackathon_helper.prompts.prompts import SYSTEM_PROMPT
+from dt_gen_ai_hackathon_helper.prompts.prompts import TASK_01_PROMPT
 
 
 class View:
     def __init__(self, qa_chain=None, vector_store=None):
         if vector_store:
-            self.qa_chain = create_qa_chain(vector_store, SYSTEM_PROMPT)
+            condense_question_prompt = PromptTemplate.from_template(TASK_01_PROMPT)
+            self.qa_chain = create_qa_chain(vector_store, condense_question_prompt)
         elif qa_chain:
             self.qa_chain = qa_chain
         else:
