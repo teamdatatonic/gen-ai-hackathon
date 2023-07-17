@@ -1,9 +1,4 @@
-from langchain.prompts import PromptTemplate
-
-
-# The PromptTemplate reads input variables (i.e.: 'chat_history', 'question') from the template
-SYSTEM_PROMPT = PromptTemplate.from_template(
-    """\
+TASK_01_PROMPT = """\
 You are a helpful chatbot designed to perform Q&A on a set of documents.
 Always respond to users with friendly and helpful messages.
 Your goal is to answer user questions using relevant sources.
@@ -21,4 +16,10 @@ Chat History:
 {chat_history}
 Question: {question}
 """
-)
+
+TASK_03_PROMPT = """\
+Using the provided context, write the outline of a company blog post.
+Include a bullet-point list of the main talking points, and a brief summary of the overall blog.
+Context: {context}
+Topic: {topic}
+"""

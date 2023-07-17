@@ -1,12 +1,15 @@
 import gradio as gr
+from langchain.prompts import PromptTemplate
+
 from dt_gen_ai_hackathon_helper.chains.chains import create_qa_chain
-from dt_gen_ai_hackathon_helper.prompts.prompts import SYSTEM_PROMPT
+from dt_gen_ai_hackathon_helper.prompts.prompts import TASK_01_PROMPT
 
 
 class View:
     def __init__(self, qa_chain=None, vector_store=None):
         if vector_store:
-            self.qa_chain = create_qa_chain(vector_store, SYSTEM_PROMPT)
+            condense_question_prompt = PromptTemplate.from_template(TASK_01_PROMPT)
+            self.qa_chain = create_qa_chain(vector_store, condense_question_prompt)
         elif qa_chain:
             self.qa_chain = qa_chain
         else:
@@ -28,9 +31,11 @@ class View:
         )
 
         # Format source documents (sources of excerpts passed to the LLM) into links the user can validate
+        # Strip index.html so URLs terminate in the parent folder
+        # Strip https:// and http:// and replace with https:// to enforce https protocol and catch cases where https:// is present or not present
         sources = [
             "[https://{0}](https://{0})".format(
-                doc.metadata["source"].replace("index.html", "")
+                doc.metadata["source"].replace("index.html", "").replace("https://", "").replace("http://", "")
             )
             for doc in response["source_documents"]
         ]
@@ -63,7 +68,7 @@ class View:
         history[-1][1] = bot_template.format(bot_message, bot_sources)
         return history
 
-    def launch_interface(self):
+    def launch_interface(self, share=True, debug=True):
         # Build a simple GradIO app that accepts user input and queries the LLM
         # Then displays the response in a ChatBot interface, with markdown support.
         with gr.Blocks(theme=gr.themes.Base()) as demo:
@@ -92,4 +97,4 @@ class View:
         # Create a queue system so multiple users can access the page at once
         demo.queue()
         # Launch the webserver locally
-        demo.launch(share=True, debug=True)
+        demo.launch(share=share, debug=debug)
