@@ -7,7 +7,7 @@ packages = [{include = "dt_gen_ai_hackathon_helper"}]
 
 [tool.poetry.dependencies]
 python = "^3.9.16"
-langchain = "^0.0.225"
+langchain = "^0.0.240"
 chromadb = "^0.3.21"
 tiktoken = "^0.3.3"
 unstructured = "^0.6.3"
