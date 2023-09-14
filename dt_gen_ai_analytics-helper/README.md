@@ -3,10 +3,6 @@
 </table>
 <hr>
 
-**➡️ Your task:** Learn about Generative AI by building your own Analytics Assistant using Python and LangChain!
-
-**❗ Note:** This workshop has been designed to be run in Jupyter notebook
-
 ## Datatonic GenAI Hackathon Helper module
 - A helper Python module to abstract parts of the Datatonic Gen AI Hackathon workshop. 
 

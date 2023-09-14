@@ -21,7 +21,7 @@
 </table>
 <hr>
 
-**➡️ Your task:** Learn about Generative AI by building your own Knowledge Worker adn Analytics Assistant using Python and LangChain!
+**➡️ Your task:** Learn about Generative AI by building your own Knowledge Worker using Python and LangChain!
 
 **❗ Note:** This workshop has been designed to be run in Google CoLab and Jupyter Notebook. Support for running the workshop locally or using VertexAI Workbench is provided, but we heavily recommend CoLab for the best experience.
 

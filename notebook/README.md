@@ -1,4 +1,4 @@
-<h1 align="center"> Generative AI Hackathon</h1>
+<h1 align="center"> Generative AI Hackathon: Analytics Assistant</h1>
 <table align="center">
 </table>
 <hr>
