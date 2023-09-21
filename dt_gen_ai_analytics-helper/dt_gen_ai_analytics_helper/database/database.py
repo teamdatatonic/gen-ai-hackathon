@@ -15,6 +15,8 @@ class Database:
             autocommit=True, autoflush=True, bind=self.engine
         )
         self.schema = schema
+        print("creating db connection...")
+        self.connect = self.engine.connect()
 
     def create_engine(self, url):
         return create_engine(url)
@@ -26,7 +28,9 @@ class Database:
     def create_session(self):
         return self.sessionmaker()
     
-
+    def create_connection(self):
+        return  self.connect
+    
 class BigQueryDatabase(Database):
     def __init__(
         self,

@@ -27,6 +27,7 @@ black = "^23.3.0"
 httpx = "^0.24.1"
 pytest = "^7.4.0"
 gradio = "^3.35.2"
+pymysql = "^1.1.0"
 
 
 [tool.poetry.group.dev.dependencies]

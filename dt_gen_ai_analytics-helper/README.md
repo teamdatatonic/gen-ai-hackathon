@@ -19,3 +19,6 @@
 - Evaluate the progress toward financial goals using the "financial_goals" table and compare it to actual financial data from other tables.
 - Determine which suppliers have the most orders or provide the most products based on data from the "supplier_orders" table
 
+## Some test questions for the PandasAgent
+- List 10 rows in customer table?
+- Create a bar chart to show top 2 product review scores

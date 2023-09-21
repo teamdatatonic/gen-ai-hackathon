@@ -1,12 +1,9 @@
 # from langchain.chains import SQLDatabaseSequentialChain
 from langchain_experimental.sql.base import  SQLDatabaseSequentialChain
-from langchain.agents.agent_toolkits import create_python_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
-from langchain.agents.agent_toolkits import create_csv_agent
-from langchain.tools.python.tool import PythonREPLTool
+from langchain.agents import(create_pandas_dataframe_agent)
 from langchain.agents.agent_types import AgentType
 from langchain.agents import create_sql_agent 
-from langchain.agents import initialize_agent
 from langchain import LLMChain,PromptTemplate
 from datetime import date
 from pathlib import Path
@@ -86,3 +83,8 @@ def create_agent(llm, db, question):
     return answer
 
 
+def pandas_agent(question,llm, df):
+    
+    agent = create_pandas_dataframe_agent(llm, df, verbose=True)
+    response = agent.run(question)
+    return response
