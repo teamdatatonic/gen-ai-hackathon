@@ -10,7 +10,7 @@
 ## To launch Jupyter Notebook
 - git clone the github repository `gh repo clone teamdatatonic/gen-ai-hackathon` 
 - Make sure an IDE to launch Jupyter notebook (eg. VSCode) is installed
-- open and run all cells in `analytics_hackathon.ipynb`. 
+- open and run all cells in `notebook/analytics_hackathon.ipynb`. 
 - This should install all dependecies using `poetry` and launch a `Jupyter notebook` as well
 
 The notebook is self-contained (includes python `pip` install commands), however, the following pre-requisites are required to get started:
