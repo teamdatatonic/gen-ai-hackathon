@@ -24,3 +24,4 @@
 ## Some test questions for the PandasAgent
 - List 10 rows in customer table?
 - Create a bar chart to show top 2 product review scores
+- List 3 customers and thier phone numbers
