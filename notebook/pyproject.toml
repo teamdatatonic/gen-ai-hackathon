@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
-langchain = "^0.0.288"
+langchain = "0.0.240"
 google-cloud-aiplatform = "^1.32.0"
 google-cloud-storage = "^2.10.0"
 google-cloud-bigquery-storage = "^2.22.0"
@@ -15,6 +15,7 @@ sqlalchemy-bigquery = "^1.8.0"
 langchain-experimental = "^0.0.17"
 pyarrow = "^13.0.0"
 ipython = "^8.15.0"
+gradio = "^3.35.2"
 
 
 [tool.poetry.group.dev.dependencies]
