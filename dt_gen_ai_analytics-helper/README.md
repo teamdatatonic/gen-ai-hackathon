@@ -7,6 +7,8 @@
 
 ## Some test questions for the LLMchain 
 - How many employees are there?
+- How many employees are there? write an email about this 
+- What are the top 5 cities where my customers are located in
 - What is the total_revenue?
  - Summarize this
  - why do they have the highest average rating?
@@ -17,7 +19,7 @@
 - Identify any missing data in the "employees" table, such as missing contact information
 - Determine the most popular product in terms of reviews over different time periods
 - Evaluate the progress toward financial goals using the "financial_goals" table and compare it to actual financial data from other tables.
-- Determine which suppliers have the most orders or provide the most products based on data from the "supplier_orders" table
+- Determine which suppliers have the most orders or provide the most products
 
 ## Some test questions for the PandasAgent
 - List 10 rows in customer table?

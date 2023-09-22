@@ -16,12 +16,15 @@ import gradio as gr
 import json
 import pandas as pd
 
+import random
+import time
+
 # Define environmental variables
 PROJECT_ID = 'dt-gen-ai-hackathon-dev'
 DATASET_ID = 'database_analytics_demo_v2'
 
+# Define LLM andBgquery Database connection 
 biqquery_client()
-
 llm = VertexAI(model_name='text-bison@001',
                temperature=0, max_output_tokens=1024)
 
@@ -39,10 +42,10 @@ langchain_db = SQLDatabase(
 def query_database(question, llm=llm, db=langchain_db):
     # Call the SQLDBChain to get the answer based on the question
     output = create_db_chain(llm, db, question)
-
+ 
     chatbot_history = []
 
-# get SQL query from natural language
+    #  get SQL query from natural language
     sql_query = output["intermediate_steps"][1]
     query_result = output["intermediate_steps"][3]
     nl_summary = output["result"]
@@ -73,10 +76,10 @@ def query_database(question, llm=llm, db=langchain_db):
     )
 
 # Define a function to summerize an sql result
-def resummarise_sql(question, dataframe_json,):
+def resummarise_sql(question):
     chatbot_history, markdown_table, sql_query= query_database(question=question)
 
-    dataframe = pd.read_json(dataframe_json)
+    # dataframe = pd.read_json(dataframe_json)
 
     response = resummarise(query=question,
                             initial_query=sql_query,
@@ -93,12 +96,14 @@ def resummarise_sql(question, dataframe_json,):
 
     return response
 
+
 # Define an sql agent with SQLToolKit
 def sql_agent(question):
     response = create_agent(llm=llm, db=langchain_db, question=question)
 
     return response
 
+# Define an pandas agent and pass in a dataframe
 def pd_agent(question):
 
     chatbot_history, dataframe, sql_query = query_database(question=question)
@@ -109,21 +114,39 @@ def pd_agent(question):
     response = pandas_agent(question=question, llm=llm, df=df)
 
     # check if response is a plot, then render that in UI else return response
-
     return response
 
 
+# Gradio chatbot and interface
+with gr.Blocks(title="Analytics Assistant") as demo:
+    chatbot = gr.Chatbot()
 
-# Create a Gradio interface 
-iface = gr.Interface(
-    fn= pd_agent,  # Function to execute when a query is received
-    inputs="text",      # Input is a single text field
-    outputs="text",     # Output will be a text response
-    title="Analytics Worker Demo",
-    description="Enter a question, and the system will query the database and provide an answer.",
-)
+    with gr.Tab("Ask a question:"):
+        # Create a textbox for user questions
+        msg = gr.Textbox(show_label=False)
 
-# run app
+        with gr.Row().style(equal_height=False):
+            with gr.Column(scale=3):
+                with gr.Row():
+                    send_message = gr.Button(
+                        value="Submit", variant="primary"
+                    ).style(size="sm")
+                    clear = gr.ClearButton([msg, chatbot])
+                    # clear_history = gr.Button(
+                    #     value="Clear History", variant="secondary"
+                    # ).style(size="sm")
+
+    def respond(question, chat_history):
+        bot_message = pd_agent(question)
+        chat_history.append((question, bot_message))
+        time.sleep(2)
+        return "", chat_history
+    
+
+    msg.submit(respond, [msg, chatbot], [msg, chatbot])
+    send_message.click(
+                respond, [msg, chatbot], [msg, chatbot]
+            )
+
 if __name__ == "__main__":
-    # Launch the Gradio interface on a specified port (e.g., 5000)
-    iface.launch(share=True)
+    demo.launch(share=True)
