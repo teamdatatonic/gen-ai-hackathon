@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "dt-gen-ai-hackathon-helper"
-version = "0.1.0"
+version = "0.1.1"
 description = "Intro to LangChain Hackathon Helper"
-authors = ["Zachary <zachary.smith@datatonic.com>"]
+authors = ["Zachary <zachary.smith@datatonic.com>", "Juan <juan.calvo@datatonic.com"]
 packages = [{include = "dt_gen_ai_hackathon_helper"}]
 
 [tool.poetry.dependencies]
