@@ -21,6 +21,14 @@ def create_data_store(project_id: str, data_store_id: str, display_name: str):
         display_name: The display name of the data store to create.
     Returns:
         None
+    e.g.:
+    from dt_gen_ai_hackathon_helper.vertex_ai_search import vertex_ai_search
+
+    display_name = "data_store_test_from_notebook"
+    data_store_name = "alphabet_investor_pdfs"
+    hackathon_team_name = "team_1"
+
+    vertex_ai_search.create_data_store(PROJECT_ID, data_store_name + "_" + hackathon_team_name, display_name)
     """
     # Get the access token from gcloud
     process = subprocess.Popen(["gcloud", "auth", "print-access-token"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -149,6 +157,13 @@ def create_search_ai_app(project_id: str, display_name: str, data_store_id: str,
         solution_type_search: The solution type of the search AI app to create.
     Returns:
         None
+    e.g.:
+    from dt_gen_ai_hackathon_helper.vertex_ai_search import vertex_ai_search
+
+    display_name = "app_team_1"
+    solution_type_search = "SOLUTION_TYPE_SEARCH"
+
+    vertex_ai_search.create_search_ai_app(PROJECT_ID, display_name, data_store_id, solution_type_search)
     """
     # Get the access token from gcloud
     process = subprocess.Popen(["gcloud", "auth", "print-access-token"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
