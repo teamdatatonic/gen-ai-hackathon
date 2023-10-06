@@ -56,16 +56,17 @@ def create_data_store(project_id: str, data_store_id: str, display_name: str):
         logging.info(response.text)
 
 
-def import_documents(
+def ingest_documents(
         project_id: str,
         location: str,
         data_store_id: str,
         gcs_uri: Optional[str] = None,
         bigquery_dataset: Optional[str] = None,
         bigquery_table: Optional[str] = None,
+        data_schema: str = "content",
 ) -> str:
     """
-    Import documents into a data store.
+    Ingest documents into a data store.
     Args:
         project_id: The project ID of the project to import documents into.
         location: The location of the data store to import documents into.
@@ -73,6 +74,7 @@ def import_documents(
         gcs_uri: The GCS URI of the documents to import.
         bigquery_dataset: The BigQuery dataset of the documents to import.
         bigquery_table: The BigQuery table of the documents to import.
+        data_schema: The data schema of the documents to import.
     Returns:
         The operation name of the import documents operation.
     """
@@ -102,7 +104,7 @@ def import_documents(
         request = discoveryengine.ImportDocumentsRequest(
             parent=parent,
             gcs_source=discoveryengine.GcsSource(
-                input_uris=[gcs_uri], data_schema="custom"
+                input_uris=[gcs_uri], data_schema=data_schema
             ),
             # Options: `FULL`, `INCREMENTAL`
             reconciliation_mode=discoveryengine.ImportDocumentsRequest.ReconciliationMode.INCREMENTAL,
