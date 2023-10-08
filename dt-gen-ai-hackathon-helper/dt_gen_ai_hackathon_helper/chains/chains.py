@@ -18,7 +18,7 @@ def create_qa_chain(vector_store, condense_question_prompt, k=4, temperature=0.0
     # The selected Google model uses embedded documents related to the query
     # It parses these documents in order to answer the user question.
     # We use the VertexAI LLM, however other models can be substituted here
-    model = VertexAI(temperature=temperature)
+    model = VertexAI(model_name='text-bison@001',temperature=temperature)
 
     # A conversation retrieval chain keeps a history of Q&A / conversation
     # This allows for contextual questions such as "give an example of that (previous response)".

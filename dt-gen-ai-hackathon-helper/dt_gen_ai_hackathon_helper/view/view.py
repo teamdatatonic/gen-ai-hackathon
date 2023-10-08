@@ -26,7 +26,7 @@ class View:
         response = self.qa_chain(
             {
                 "question": question,
-                "chat_history": chat_history,
+                # "chat_history": chat_history,
             }
         )
 
