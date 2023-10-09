@@ -233,3 +233,6 @@ pyrightconfig.json
 
 chromadb
 datatonic.com
+
+# Various
+/secrets
