@@ -6,7 +6,7 @@ authors = ["Zachary <zachary.smith@datatonic.com>", "Juan <juan.calvo@datatonic.
 packages = [{include = "dt_gen_ai_hackathon_helper"}]
 
 [tool.poetry.dependencies]
-python = "^3.9.16"
+python = ">=3.9,<3.12"
 langchain = "^0.0.236"
 chromadb = "^0.3.21"
 tiktoken = "^0.3.3"
