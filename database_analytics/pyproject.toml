@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "test"
+name = "analytics_assistant"
 version = "0.1.0"
 description = ""
 authors = ["alvaroazabal <alvaro.azabal@datatonic.com>"]
@@ -17,6 +17,7 @@ tabulate = "^0.9.0"
 pyarrow = "^13.0.0"
 ipython = "^8.15.0"
 gradio = "^3.35.2"
+notebook = "^7.0.4"
 
 
 [tool.poetry.group.dev.dependencies]
