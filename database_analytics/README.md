@@ -5,16 +5,12 @@
 
 **➡️ Your task:** Learn about Generative AI by building your own Analytics Assistant using Python and LangChain!
 
-**❗ Note:** This workshop has been designed to be run in Jupyter notebook
+**❗ Note:** This workshop has been designed to be run in Vertex Workbench
 
-## To launch Jupyter Notebook
-- git clone the github repository `gh repo clone teamdatatonic/gen-ai-hackathon` 
-- Make sure an IDE to launch Jupyter notebook (eg. VSCode) is installed
-- open and run all cells in `notebook/analytics_hackathon.ipynb`. 
-- This should install all dependecies using `poetry` and launch a `Jupyter notebook` as well
+- Instructions on how launch the notebook using Vertex Workbench are provided in each notebook.
 
 The notebook is self-contained (includes python `pip` install commands), however, the following pre-requisites are required to get started:
-- Google Cloud Project with  Vertex AI API enabled.
+- Google Cloud Project with Vertex AI API enabled.
 - A `credentials.json` file for accessing the Vertex AI API via a service account.
 
 
