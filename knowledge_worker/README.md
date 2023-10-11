@@ -1,19 +1,19 @@
 <h1 align="center"> Generative AI Hackathon</h1>
 <table align="center">
     <td>
-        <a href="https://colab.research.google.com/github/teamdatatonic/gen-ai-hackathon/blob/main/hackathon.ipynb">
+        <a href="https://colab.research.google.com/github/teamdatatonic/gen-ai-hackathon/blob/main/knowledge_worker/hackathon.ipynb">
             <img src="https://cloud.google.com/ml-engine/images/colab-logo-32px.png" alt="Colab logo">
             <span style="vertical-align: middle;">Run in Colab</span>
         </a>
     </td>
     <td>
-        <a href="https://github.com/teamdatatonic/gen-ai-hackathon/blob/main/hackathon.ipynb">
+        <a href="https://github.com/teamdatatonic/gen-ai-hackathon/blob/main/knowledge_worker/hackathon.ipynb">
             <img src="https://cloud.google.com/ml-engine/images/github-logo-32px.png" alt="GitHub logo">
             <span style="vertical-align: middle;">View on GitHub</span>
         </a>
     </td>
     <td>
-        <a href="https://console.cloud.google.com/vertex-ai/workbench/deploy-notebook?download_url=https://raw.githubusercontent.com/teamdatatonic/gen-ai-hackathon/main/hackathon.ipynb">
+        <a href="https://console.cloud.google.com/vertex-ai/workbench/deploy-notebook?download_url=https://raw.githubusercontent.com/teamdatatonic/gen-ai-hackathon/main/knowledge_worker/hackathon.ipynb">
             <img src="https://lh3.googleusercontent.com/UiNooY4LUgW_oTvpsNhPpQzsstV5W8F7rYgxgGBD85cWJoLmrOzhVs_ksK_vgx40SHs7jCqkTkCk=e14-rj-sc0xffffff-h130-w32" alt="Vertex AI logo"> 
             <span style="vertical-align: middle;">Open in Vertex AI Workbench</span>
         </a>
