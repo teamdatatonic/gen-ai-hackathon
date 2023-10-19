@@ -2,6 +2,7 @@ import gradio as gr
 from langchain.prompts import PromptTemplate
 
 from dt_gen_ai_hackathon_helper.chains.chains import create_qa_chain
+from dt_gen_ai_hackathon_helper.formatter_helper.formatter_helper import gsutil_uri_to_gcs_url
 from dt_gen_ai_hackathon_helper.prompts.prompts import TASK_01_PROMPT
 
 
@@ -32,16 +33,18 @@ class View:
 
         # Format source documents (sources of excerpts passed to the LLM) into links the user can validate
         # Strip index.html so URLs terminate in the parent folder
-        # Strip https:// and http:// and replace with https:// to enforce https protocol and catch cases where https:// is present or not present
+        # Strip https:// and http:// and replace with https:// to enforce https protocol and catch cases where
+        # https:// is present or not present
         sources = [
-            "[https://{0}](https://{0})".format(
-                doc.metadata["source"].replace("index.html", "").replace("https://", "").replace("http://", "")
-            )
+            f"https://{doc.metadata['source'].replace('index.html', '').replace('https://', '').replace('http://', '')}"
             for doc in response["source_documents"]
         ]
-
+        source_gcs_urls = [
+            gsutil_uri_to_gcs_url(source) if source.startswith("gs://") else source
+            for source in sources
+        ]
         # Return the LLM answer, and list of sources used (formatted as a string)
-        return response["answer"], "\n\n".join(sources)
+        return response["answer"], "\n\n".join(source_gcs_urls)
 
     def submit(self, msg, chatbot):
         # First create a new entry in the conversation log
