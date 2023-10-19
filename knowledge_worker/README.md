@@ -27,7 +27,7 @@
 
 The notebook is self-contained (includes python `pip` install commands), however, the following pre-requisites are required to get started:
 - Google Cloud Project with  Vertex AI API enabled.
-- A `credentials.json` file for accessing the Vertex AI API via a service account.
+- A google account with access to the needed resources (see below).
 
 ## Going further
 
@@ -37,6 +37,10 @@ The next steps covered include separating the Gradio front-end into a separate s
 ## Running the notebook for a hackathon event
 
 1. Create a dedicated Google Cloud project with Vertex AI enabled.
-2. Create a service account roles: `Vertex AI User` (for vertex ai endpoints), `Storage Object Viewer` (to download demo and webarchive materials) and `Storage Legacy Bucket Reader` (to read the contents of buckets for dynamic selection).
-3. Distribute the JSON credentials for this service account, to allow participants to impersonate the SA and authenticate to access the Vertex AI endpoint.
-4. ❗ Post-workshop, remember to delete the key to maintain security and prevent further billing.
+2. Add each user with their own Google account with the following IAM roles:
+    - `Vertex AI User` (roles/aiplatform.user) :for vertex ai endpoints
+    - `Storage Object Viewer` (roles/storage.objectViewer) :to download demo and webarchive materials
+    - `Storage Legacy Bucket Reader` (roles/storage.legacyBucketReader) :to read the contents of buckets for dynamic selection
+    - `Discovery Engine Editor` (roles/discoveryengine.editor): to create and edit applications and data stores
+3. Confirm that users can access the GCP resources.
+4. ❗ Post-workshop, remember to delete all the users from the project.

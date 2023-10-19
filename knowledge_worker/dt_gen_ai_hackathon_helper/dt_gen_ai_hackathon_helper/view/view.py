@@ -35,13 +35,10 @@ class View:
         # Strip index.html so URLs terminate in the parent folder
         # Strip https:// and http:// and replace with https:// to enforce https protocol and catch cases where
         # https:// is present or not present
-        sources = [
-            f"https://{doc.metadata['source'].replace('index.html', '').replace('https://', '').replace('http://', '')}"
-            for doc in response["source_documents"]
-        ]
         source_gcs_urls = [
-            gsutil_uri_to_gcs_url(source) if source.startswith("gs://") else source
-            for source in sources
+            gsutil_uri_to_gcs_url(doc.metadata['source']) if doc.metadata['source'].startswith("gs://")
+            else f"https://{doc.metadata['source'].replace('index.html', '').replace('https://', '').replace('http://', '')}"
+            for doc in response["source_documents"]
         ]
         # Return the LLM answer, and list of sources used (formatted as a string)
         return response["answer"], "\n\n".join(source_gcs_urls)
