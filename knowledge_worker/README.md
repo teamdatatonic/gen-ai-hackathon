@@ -40,7 +40,7 @@ The next steps covered include separating the Gradio front-end into a separate s
 2. Add each user with their own Google account with the following IAM roles:
     - `Vertex AI User` (roles/aiplatform.user) :for vertex ai endpoints
     - `Storage Object Viewer` (roles/storage.objectViewer) :to download demo and webarchive materials
-    - `Service Usage Viewer` (roles/serviceusage.serviceUsageViewer) :to read the contents of buckets for dynamic selection
+    - `Service Usage Consumer` (roles/serviceusage.serviceUsageConsumer) :to read the contents of buckets for dynamic selection
     - `Discovery Engine Admin` (roles/discoveryengine.admin): to create and edit applications and data stores
 3. Confirm that users can access the GCP resources.
 4. ❗ Post-workshop, remember to delete all the users from the project.
