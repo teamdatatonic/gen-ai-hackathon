@@ -8,7 +8,6 @@ import requests
 from google.api_core.client_options import ClientOptions
 from google.cloud import discoveryengine
 
-http.client.HTTPConnection.debuglevel = 1
 logging.basicConfig(level=logging.INFO)
 
 
@@ -57,11 +56,11 @@ def create_data_store(project_id: str, data_store_id: str, display_name: str):
     response = requests.post(url, headers=headers, json=payload)
 
     if response.status_code == 200 or response.status_code == 201:
-        print("Data store created successfully.")
-        print(json.dumps(response.json(), indent=4))
+        logging.info("Data store created successfully.")
+        logging.info(json.dumps(response.json(), indent=4))
     else:
-        logging.info(f"Failed to create data store. Status code: {response.status_code}")
-        logging.info(response.text)
+        logging.error(f"Failed to create data store. Status code: {response.status_code}")
+        logging.error(response.text)
 
 
 def ingest_documents(
@@ -106,8 +105,6 @@ def ingest_documents(
         branch="default_branch",
     )
 
-    print(parent)
-
     if gcs_uri:
         request = discoveryengine.ImportDocumentsRequest(
             parent=parent,
@@ -133,7 +130,7 @@ def ingest_documents(
     # Make the request
     operation = client.import_documents(request=request)
 
-    print(f"Waiting for operation to complete: {operation.operation.name}")
+    logging.info("Waiting for document import to complete...")
     response = operation.result()
 
     # Once the operation is complete,
@@ -141,8 +138,7 @@ def ingest_documents(
     metadata = discoveryengine.ImportDocumentsMetadata(operation.metadata)
 
     # Handle the response
-    print(response)
-    print(metadata)
+    logging.info(f"Result: {response}")
 
     return operation.operation.name
 
