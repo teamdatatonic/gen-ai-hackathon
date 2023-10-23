@@ -3,7 +3,7 @@ from typing import Dict
 import pandas as pd
 
 
-def format_results(results: Dict) -> pd.DataFrame:
+def format_results(results: Dict, print_source=False) -> pd.DataFrame:
     """
     Formats and prints the results of a question-answering query.
     Args:
@@ -11,6 +11,8 @@ def format_results(results: Dict) -> pd.DataFrame:
     Returns:
         None
     """
+    # Display settings for columns
+    pd.set_option('display.max_colwidth', 150)
     # Prepare the header for the table
     print("*" * 79)
     print(f"Answer: {results['result']}")
@@ -23,7 +25,7 @@ def format_results(results: Dict) -> pd.DataFrame:
     counter = 1
     for doc in results["source_documents"]:
         new_row = pd.DataFrame({
-            'Document': f"Dcoument {counter}",
+            'Document': f"Document {counter}",
             'Source': [gsutil_uri_to_gcs_url(doc.metadata['source'])],
             'First 100 characters': [doc.page_content[:100]]
         })
@@ -36,16 +38,17 @@ def format_results(results: Dict) -> pd.DataFrame:
     # Print the separator
     print("*" * 79)
 
-    # Continue with the original printing logic
-    counter = 1
-    for doc in results["source_documents"]:
-        print("-" * 79)
-        print(f"Document {counter}")
-        print("-" * 79)
-        print(f"Source of content: {gsutil_uri_to_gcs_url(doc.metadata['source'])}")
-        print("-" * 79)
-        print(doc.page_content)
-        counter += 1
+    if print_source:
+        # Continue with the original printing logic
+        counter = 1
+        for doc in results["source_documents"]:
+            print("-" * 79)
+            print(f"Document {counter}")
+            print("-" * 79)
+            print(f"Source of content: {gsutil_uri_to_gcs_url(doc.metadata['source'])}")
+            print("-" * 79)
+            print(doc.page_content)
+            counter += 1
     return df
 
 
