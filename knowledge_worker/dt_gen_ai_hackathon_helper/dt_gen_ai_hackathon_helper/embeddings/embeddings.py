@@ -1,7 +1,7 @@
 from typing import List
 from langchain.vectorstores import Chroma
 from langchain.embeddings import VertexAIEmbeddings
-from dt_gen_ai_hackathon_helper.rate_limiter import rate_limit
+from dt_gen_ai_hackathon_helper.rate_limiter.rate_limiter import rate_limit
 
 
 class CustomVertexAIEmbeddings(VertexAIEmbeddings):
