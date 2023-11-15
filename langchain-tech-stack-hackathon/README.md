@@ -21,12 +21,13 @@ The following pre-requisites are required to get started:
 - Poetry (^1.6.1)
 - A [LangSmith](https://smith.langchain.com/) account (this will require sign-up - speak to @zacharysmithdatatonic for a sign-up code to gain access immediately).
 - [DirEnv](https://direnv.net/) (or another terminal secret manager).
+- A blank project, open in VSCode.
 
 ## Tutorial walkthrough
 
-0. If using a secret file (e.g.: `.envrc`), create a `.gitignore` file similar to the one in this repository, to prevent accidentally sharing your API keys.
+0. If using a secret file (e.g.: `.envrc`), create a `.gitignore` file [like this one](https://www.toptal.com/developers/gitignore/api/direnv,python,visualstudiocode,macos), to prevent accidentally sharing your API keys.
 
-1. Create a `.envrc` file and populate it with this template:
+1. Create a `.envrc` file and populate it with this template (adding in your LangSmith API key):
 
 ```bash
 export LANGCHAIN_TRACING_V2=true
@@ -44,6 +45,10 @@ poetry run langchain app new api --package rag-google-cloud-vertexai-search
 ```
 
 _Type 'Y' when prompted to install rag-google-cloud-vertexai-search as a mirrored module_
+
+- This creates a new Poetry environment with the LangChain CLI tool installed.
+- Then activates the virtual environment to access the tool.
+- And finally create a new LangServe app, using the [rag-google-cloud-vertexai-search](https://github.com/langchain-ai/langchain/tree/master/templates/rag-google-cloud-vertexai-search) component (written by our own Juan Calvo!).
 
 3. Replace the `NotImplemented` route in `api/app/server.py` with a route for your component chain:
 
@@ -68,7 +73,9 @@ source ./.venv/bin/activate
 poetry run langchain serve
 ```
 
-6. Visit http://127.0.0.1:8000/vertex-ai-search/playground/ in your web browser and play with your chain.
+- We want to close our initial terminal in order to close the first virtual environment from step 2, to then enable and activate the API Poetry environment for serving.
+
+6. Visit http://127.0.0.1:8000/vertex-ai-search/playground/ in your web browser and play with the chain.
 
 7. Open LangSmith (https://smith.langchain.com/) and visit the project page. View one of your traces (created when you tested the playground demo) and use it to create a dataset (name it `vertex-ai-search-dataset`).
 
@@ -112,6 +119,9 @@ def test_chain():
 poetry add pytest --group=dev
 poetry run python -m pytest -s .
 ```
+
+- We add `pytest` to the `dev` group since we'll only be running tests during development, not once we move the code to production.
+- The `pytest -s .` command searches the repository from the current folder, and finds all tests in any sub-folders.
 
 11. View your dataset test runs, and add the trace to a new annotation queue (name it `vertex-ai-search-annotations`).
 
