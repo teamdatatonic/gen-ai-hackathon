@@ -1,4 +1,4 @@
-<h1 align="center"> Generative AI Hackathon</h1>
+<h1 align="center"> Knowledge Worker Hackathon</h1>
 <table align="center">
     <td>
         <a href="https://colab.research.google.com/github/teamdatatonic/gen-ai-hackathon/blob/main/knowledge_worker/hackathon.ipynb">
