@@ -49,7 +49,7 @@ source ./.venv/bin/activate
 poetry run langchain app new api --package rag-google-cloud-vertexai-search
 ```
 
-_Type 'Y' when prompted to install rag-google-cloud-vertexai-search as a mirrored module_
+_❗ Type 'Y' when prompted to install rag-google-cloud-vertexai-search as a mirrored module_
 
 - This creates a new Poetry environment with the LangChain CLI tool installed.
 - Then activates the virtual environment to access the tool.
@@ -68,7 +68,7 @@ add_routes(app, vertex_ai_search_chain, path="/vertex-ai-search")
 name = "api"
 ```
 
-_This can be any name other than `__app_name__`_
+_❗ This can be any name other than `__app_name__`_
 
 5. Open a new terminal in `/api` and run these commands:
 
@@ -138,7 +138,11 @@ You've completed this tutorial and now have a complete LangChain project perform
 ## Running a hackathon event
 
 1. Create a dedicated Google Cloud project with Vertex AI enabled.
-2. Add each user with their own Google account with the following IAM roles:
+2. Create a Vertex AI Search app:
+    - Create an app [here](https://cloud.google.com/generative-ai-app-builder/docs/create-engine-es).
+    - Create a data store alongside the app (or separately [here](https://cloud.google.com/generative-ai-app-builder/docs/create-data-store-es)).
+        - A suitable dataset to test this template with is the Alphabet Earnings Reports, which you can find [here](https://abc.xyz/investor/). The data is also available at gs://cloud-samples-data/gen-app-builder/search/alphabet-investor-pdfs.
+3. Add each user with their own Google account with the following IAM roles:
     - `Vertex AI User` (roles/aiplatform.user): for vertex ai endpoints
-3. Confirm that users can access the GCP resources.
-4. ❗ Post-workshop, remember to delete all the users from the project.
+4. Confirm that users can access the GCP resources.
+5. ❗ Post-workshop, remember to delete all the users from the project.
