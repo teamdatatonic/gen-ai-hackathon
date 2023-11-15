@@ -17,6 +17,7 @@ The following pre-requisites are required to get started:
 
 - Google Cloud Project with Vertex AI API enabled.
 - A Google account with access to the needed resources ([see below](#running-a-hackathon-event)).
+- The `gcloud` CLI tool, configured to access the hackathon GCP.
 - Python (this tutorial assumed 3.11, but other versions will work).
 - Poetry (^1.6.1)
 - A [LangSmith](https://smith.langchain.com/) account (this will require sign-up - speak to @zacharysmithdatatonic for a sign-up code to gain access immediately).
@@ -34,6 +35,10 @@ export LANGCHAIN_TRACING_V2=true
 export LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 export LANGCHAIN_API_KEY=<your-langsmith-api-key>
 export LANGCHAIN_PROJECT=rag-google-cloud-vertexai-search  # if not specified, defaults to "default"
+
+export GOOGLE_CLOUD_PROJECT_ID=dt-gen-ai-hackathon-dev
+export DATA_STORE_ID=<your-data-store-id>
+export MODEL_TYPE=chat-bison@001
 ```
 
 2. Open a new terminal and run these commands:
