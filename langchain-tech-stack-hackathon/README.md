@@ -1,0 +1,129 @@
+<h1 align="center"> LangChain Tech-Stack Hackathon</h1>
+<table align="center">
+    <td>
+        <a href="https://github.com/teamdatatonic/gen-ai-hackathon/blob/main/langchain-tech-stack-hackathon/">
+            <img src="https://cloud.google.com/ml-engine/images/github-logo-32px.png" alt="GitHub logo">
+            <span style="vertical-align: middle;">View on GitHub</span>
+        </a>
+    </td>
+</table>
+<hr>
+
+**➡️ Your task:** Learn the complete LangChain tech stack by building your own Knowledge Worker using Python and LangChain!
+
+**❗ Note:** This workshop has been designed to be run locally in an IDE like VSCode.
+
+The following pre-requisites are required to get started:
+
+- Google Cloud Project with Vertex AI API enabled.
+- A Google account with access to the needed resources ([see below](#running-a-hackathon-event)).
+- Python (this tutorial assumed 3.11, but other versions will work).
+- Poetry (^1.6.1)
+- A [LangSmith](https://smith.langchain.com/) account (this will require sign-up - speak to @zacharysmithdatatonic for a sign-up code to gain access immediately).
+- [DirEnv](https://direnv.net/) (or another terminal secret manager).
+
+## Tutorial walkthrough
+
+0. If using a secret file (e.g.: `.envrc`), create a `.gitignore` file similar to the one in this repository, to prevent accidentally sharing your API keys.
+
+1. Create a `.envrc` file and populate it with this template:
+
+```bash
+export LANGCHAIN_TRACING_V2=true
+export LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
+export LANGCHAIN_API_KEY=<your-langsmith-api-key>
+export LANGCHAIN_PROJECT=rag-google-cloud-vertexai-search  # if not specified, defaults to "default"
+```
+
+2. Open a new terminal and run these commands:
+
+```bash
+poetry init -n --python=3.11.6 && poetry add langchain-cli
+source ./.venv/bin/activate
+poetry run langchain app new api --package rag-google-cloud-vertexai-search
+```
+
+_Type 'Y' when prompted to install rag-google-cloud-vertexai-search as a mirrored module_
+
+3. Replace the `NotImplemented` route in `api/app/server.py` with a route for your component chain:
+
+```python
+from rag_google_cloud_vertexai_search.chain import chain as vertex_ai_search_chain
+
+add_routes(app, vertex_ai_search_chain, path="/vertex-ai-search")
+```
+
+4. Update the project `name` in `api/pyproject.toml`:
+```toml
+name = "api"
+```
+
+_This can be any name other than `__app_name__`_
+
+5. Open a new terminal in `/api` and run these commands:
+
+```bash
+poetry install
+source ./.venv/bin/activate
+poetry run langchain serve
+```
+
+6. Visit http://127.0.0.1:8000/vertex-ai-search/playground/ in your web browser and play with your chain.
+
+7. Open LangSmith (https://smith.langchain.com/) and visit the project page. View one of your traces (created when you tested the playground demo) and use it to create a dataset (name it `vertex-ai-search-dataset`).
+
+8. View the dataset and click `New Test Run` to get a code snippet:
+
+```python
+client = langsmith.Client()
+chain_results = client.run_on_dataset(
+	dataset_name="vertex-ai-search-dataset", # this will change if you use a different dataset name.
+	llm_or_chain_factory=chain,
+	project_name="...", # this will be a random string
+	concurrency_level=5,
+	verbose=True,
+)
+```
+
+9. Create a new PyTest file `test_chain.py` in `api/packages/rag-google-cloud-vertexai-search/tests/`:
+
+```python
+from pirate_assistant.chain import chain
+import langsmith
+from datetime import datetime # import datetime module to get a timestamp
+
+def test_chain():
+	client = langsmith.Client()
+
+	chain_results = client.run_on_dataset(
+		dataset_name="vertex-ai-search-dataset",
+		llm_or_chain_factory=chain,
+		project_name=f"vertex-ai-search-dataset-test-{int(datetime.now().strftime('%Y%m%d%H%M%S'))}", # use a timestamped unique project name each re-run
+		concurrency_level=5,
+		verbose=True,
+	)
+```
+
+- We update the `project_name` from the LangSmith code snippet default ➡️ a timestamped unique string because each dataset test run must have a unique name (the LangSmith code snippet is single-use only, so we need to fix this).
+
+10. Open a terminal in `/api` and run these commands:
+
+```bash
+poetry add pytest --group=dev
+poetry run python -m pytest -s .
+```
+
+11. View your dataset test runs, and add the trace to a new annotation queue (name it `vertex-ai-search-annotations`).
+
+12. View your annotation queue and explore the review interface.
+
+🎉🎉 **Congratulations!** 🎉🎉
+You've completed this tutorial and now have a complete LangChain project performing RAG with Vertex AI Search.
+
+## Running a hackathon event
+
+1. Create a dedicated Google Cloud project with Vertex AI enabled.
+2. Add each user with their own Google account with the following IAM roles:
+    - `Vertex AI User` (roles/aiplatform.user): for vertex ai endpoints
+3. Confirm that users can access the GCP resources.
+4. ❗ Post-workshop, remember to delete all the users from the project.
