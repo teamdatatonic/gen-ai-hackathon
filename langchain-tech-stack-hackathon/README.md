@@ -18,7 +18,7 @@ The following pre-requisites are required to get started:
 - Google Cloud Project with Vertex AI API enabled.
 - A Google account with access to the needed resources ([see below](#running-a-hackathon-event)).
 - The `gcloud` CLI tool, configured to access the hackathon GCP.
-- Python (this tutorial assumed 3.11, but other versions will work).
+- Python (this tutorial assumed 3.11, but other versions will work) (use [PyEnv](https://github.com/pyenv/pyenv) for version management).
 - Poetry (^1.6.1)
 - A [LangSmith](https://smith.langchain.com/) account (this will require sign-up - speak to @zacharysmithdatatonic for a sign-up code to gain access immediately).
 - [DirEnv](https://direnv.net/) (or another terminal secret manager).
@@ -44,6 +44,7 @@ export MODEL_TYPE=chat-bison@001
 2. Open a new terminal and run these commands:
 
 ```bash
+pyenv shell 3.11.6
 poetry init -n --python=3.11.6 && poetry add langchain-cli
 source ./.venv/bin/activate
 poetry run langchain app new api --package rag-google-cloud-vertexai-search
@@ -55,12 +56,12 @@ _❗ Type 'Y' when prompted to install rag-google-cloud-vertexai-search as a mir
 - Then activates the virtual environment to access the tool.
 - And finally create a new LangServe app, using the [rag-google-cloud-vertexai-search](https://github.com/langchain-ai/langchain/tree/master/templates/rag-google-cloud-vertexai-search) component (written by our own Juan Calvo!).
 
-3. Replace the `NotImplemented` route in `api/app/server.py` with a route for your component chain:
+3. Replace the `add_routes(app, NotImplemented)` route in `api/app/server.py` with a route for your component chain:
 
 ```python
-from rag_google_cloud_vertexai_search.chain import chain as vertex_ai_search_chain
+from rag_google_cloud_vertexai_search import chain as rag_google_cloud_vertexai_search_chain
 
-add_routes(app, vertex_ai_search_chain, path="/vertex-ai-search")
+add_routes(app, rag_google_cloud_vertexai_search_chain, path="/vertex-ai-search")
 ```
 
 4. Update the project `name` in `api/pyproject.toml`:
@@ -73,8 +74,10 @@ _❗ This can be any name other than `__app_name__`_
 5. Open a new terminal in `/api` and run these commands:
 
 ```bash
+pyenv shell 3.11.6
 poetry install
 source ./.venv/bin/activate
+poetry add google-cloud-discoveryengine
 poetry run langchain serve
 ```
 
