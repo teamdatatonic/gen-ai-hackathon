@@ -24,7 +24,7 @@ The following pre-requisites are required to get started:
 
 ## Task 1 walkthrough
 
-0. Either clone/fork this repository locally, or copy the following files into a blank project: `pyproject.toml`, `poetry.lock`, `.gitignore`.
+0. Create a `.gitignore` file with [this content](https://www.toptal.com/developers/gitignore/api/direnv,python,visualstudiocode,macos).
 
 1. Create a `.envrc` file and populate it with this template:
 
@@ -36,12 +36,34 @@ export MODEL_TYPE=chat-bison@001
 
 _❗ If you don't want to use DirEnv, just run each line as a separate terminal command - the environment variables will persist till you close the terminal window_
 
-2. Open a terminal at the root of your project and run these commands:
+2. Open a terminal at the root of your project:
+
+- Ensure the right Python version is activated, DirEnv can access your secrets file, and set Poetry to create the `.venv` environment folder locally (this helps if you need to tidy-up/reset the environment later):
 
 ```sh
 pyenv shell 3.11.6
-direnv allow # if using DirEnv as a secret manager
+direnv allow
+poetry config virtualenvs.in-project true
+```
+
+- If cloning the `pyproject.toml` and `poetry.lock` files from this repository, run these commands:
+
+```sh
 poetry install
+```
+
+- _Else_, initialise Poetry from scratch and install these requirements:
+
+```sh
+poetry install
+poetry init -n --python=3.11.6
+poetry add "langchain-cli[serve]"
+poetry add google-cloud-discoveryengine
+```
+
+- _Finally_, activate the environment and use the LangChain CLI to create a new LangServe app:
+
+```sh
 source ./.venv/bin/activate
 poetry run langchain app new api --package rag-google-cloud-vertexai-search
 ```
@@ -52,7 +74,7 @@ _❗ Type 'Y' when prompted to install rag-google-cloud-vertexai-search as a mir
 - Then activates the virtual environment to access the tool.
 - And finally create a new LangServe app, using the [rag-google-cloud-vertexai-search](https://github.com/langchain-ai/langchain/tree/master/templates/rag-google-cloud-vertexai-search) component (written by our own Juan Calvo!).
 
-3. Replace the `add_routes(app, NotImplemented)` route in `api/app/server.py` with a route for your component chain:
+3. Replace the `add_routes(app, NotImplemented)` route in `api/app/server.py` with routes for your chains:
 
 ```python
 from rag_google_cloud_vertexai_search.chain import chain as rag_google_cloud_vertexai_search_chain
@@ -70,6 +92,9 @@ poetry run langchain serve
 6. Visit http://127.0.0.1:8000/rag-google-cloud-vertexai-search/playground/ in your web browser and experiment with the API.
 
 REPLACE_WITH_VIDEO
+
+🎉🎉 **Congratulations!** 🎉🎉
+You've completed this tutorial and now have a complete LangChain API performing RAG with Vertex AI Search.
 
 ## Task 2 walkthrough
 
@@ -139,7 +164,7 @@ REPLACE_WITH_VIDEO
 REPLACE_WITH_VIDEO
 
 🎉🎉 **Congratulations!** 🎉🎉
-You've completed this tutorial and now have a complete LangChain project performing RAG with Vertex AI Search.
+You've explored the LangSmith platform for monitoring and dataset testing - if you want to explore more features of the platform, take a look at the LLM-based evaluators that can be used to evaluate dataset test runs automatically, or check out the LangChain Prompt Hub to look at community-shared LLM prompt engineering examples and techniques.
 
 ## Running a hackathon event
 
