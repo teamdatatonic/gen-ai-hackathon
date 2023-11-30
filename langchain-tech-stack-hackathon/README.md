@@ -46,16 +46,16 @@ direnv allow
 poetry config virtualenvs.in-project true
 ```
 
-- If cloning the `pyproject.toml` and `poetry.lock` files from this repository, run these commands:
+- If you have cloned this repository, run these commands:
 
 ```sh
+cd langchain-tech-stack-hackathon
 poetry install
 ```
 
 - _Else_, initialise Poetry from scratch and install these requirements:
 
 ```sh
-poetry install
 poetry init -n --python=3.11.6
 poetry add "langchain-cli[serve]"
 poetry add google-cloud-discoveryengine
