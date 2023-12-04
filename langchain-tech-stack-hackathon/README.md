@@ -63,6 +63,7 @@ poetry install
 poetry init -n --python=3.11.6
 poetry add "langchain-cli[serve]"
 poetry add google-cloud-discoveryengine
+poetry add pytest --group=dev
 ```
 
 - _Finally_, activate the environment and use the LangChain CLI to create a new LangServe app:
