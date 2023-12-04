@@ -13,16 +13,32 @@
 
 **❗ Note:** This workshop has been designed to be run locally in an IDE like VSCode.
 
-The following pre-requisites are required to get started:
+**🙋🏻‍♀️ Top Tip:** Read through the entire walkthrough before diving into your own implementation/code - some steps can be skipped e.g.: if you've cloned this repository.
+
+## Task 0 (prerequisites and setup)
+
+0. The following pre-requisites are required to get started:
 
 - Google Cloud Project with Vertex AI API enabled.
-- A Google account with access to the needed resources ([see below](#running-a-hackathon-event)).
+- A Google account with access to the required resources ([see below](#running-a-hackathon-event)).
 - The `gcloud` CLI tool, configured to access the hackathon GCP ([install instructions](https://cloud.google.com/sdk/docs/install)).
-- Python (this tutorial assumed 3.11, but other versions will work) (use [PyEnv](https://github.com/pyenv/pyenv) for version management).
+- Python (this tutorial assumed 3.11.6, but other versions will work) (use [PyEnv](https://github.com/pyenv/pyenv) for version management).
 - Poetry (^1.6.1) ([install instructions](https://python-poetry.org/docs/#installation))
 - [DirEnv](https://direnv.net/) (or another terminal secret manager).
 
-**🙋🏻‍♀️ Top Tip:** Read through the entire walkthrough before diving into your own implementation/code - some steps can be skipped e.g.: if you've cloned this repository.
+**❗ Note:** Perform the following commands from any terminal.
+
+1. Set your `gcloud` CLI tool to the correct project:
+
+```sh
+gcloud config set project dt-gen-ai-hackathon-dev
+```
+
+2. If using `pyenv`, install the correct version of Python:
+
+```sh
+pyenv install 3.11.6
+```
 
 ## Task 1 walkthrough
 
