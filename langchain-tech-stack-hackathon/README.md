@@ -9,7 +9,7 @@
 </table>
 <hr>
 
-**➡️ Your task:** Learn the complete LangChain tech stack by building your own Knowledge Worker using Python and LangChain!
+**➡️ Your task:** Learn the complete LangChain tech stack by deploying a REST API using LangChain and LangServe, and learn about LLM logging and testing using the LangSmith platform.
 
 **❗ Note:** This workshop has been designed to be run locally in an IDE like VSCode.
 
