@@ -22,6 +22,8 @@ The following pre-requisites are required to get started:
 - Poetry (^1.6.1)
 - [DirEnv](https://direnv.net/) (or another terminal secret manager).
 
+**🙋🏻‍♀️ Top Tip:** Read through the entire walkthrough before diving into your own implementation/code - some steps can be skipped e.g.: if you've cloned this repository.
+
 ## Task 1 walkthrough
 
 0. Create a `.gitignore` file with [this content](https://www.toptal.com/developers/gitignore/api/direnv,python,visualstudiocode,macos).
