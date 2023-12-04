@@ -17,9 +17,9 @@ The following pre-requisites are required to get started:
 
 - Google Cloud Project with Vertex AI API enabled.
 - A Google account with access to the needed resources ([see below](#running-a-hackathon-event)).
-- The `gcloud` CLI tool, configured to access the hackathon GCP.
+- The `gcloud` CLI tool, configured to access the hackathon GCP ([install instructions](https://cloud.google.com/sdk/docs/install)).
 - Python (this tutorial assumed 3.11, but other versions will work) (use [PyEnv](https://github.com/pyenv/pyenv) for version management).
-- Poetry (^1.6.1)
+- Poetry (^1.6.1) ([install instructions](https://python-poetry.org/docs/#installation))
 - [DirEnv](https://direnv.net/) (or another terminal secret manager).
 
 **🙋🏻‍♀️ Top Tip:** Read through the entire walkthrough before diving into your own implementation/code - some steps can be skipped e.g.: if you've cloned this repository.
